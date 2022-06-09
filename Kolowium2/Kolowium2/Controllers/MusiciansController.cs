@@ -38,9 +38,16 @@ namespace Kolowium2.Controllers
         [HttpDelete("{idMusician}")]
         public async Task<IActionResult> DeleteMusician(int idMusician)
         {
-              await _musicianDbService.DeleteMusician(idMusician);
+
+            try
+            {
+                await _musicianDbService.DeleteMusician(idMusician);
                 return Ok("Deleted musician");
-          //tu powinien byc try catch 
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
         }
 
     }
